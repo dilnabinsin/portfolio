@@ -253,14 +253,14 @@ function sendMail() {
 
 }
 
-  // document.getElementById('submit-form').addEventListener('submit', function(event) {
-  //   event.preventDefault();
-  //   emailjs.sendForm('service_5cnq41b', 'template_opnuh89', this)
-  //     .then(function(response) {
-  //       console.log('Email sent!', response.status, response.text);
-  //       alert('Email sent successfully!');
-  //     }, function(error) {
-  //       console.error('Error sending email:', error);
-  //       alert('Oops! Something went wrong.');
-  //     });
-  // });
+  document.getElementById('submit-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    emailjs.sendForm('service_5cnq41b', 'template_opnuh89', this)
+      .then(function(response) {
+        console.log('Email sent!', response.status, response.text);
+        alert('Email sent successfully!');
+      }, function(error) {
+        console.error('Error sending email:', error);
+        alert('Oops! Something went wrong.');
+      });
+  });
