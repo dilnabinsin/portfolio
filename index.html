@@ -34,16 +34,10 @@
   integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
   crossorigin="anonymous"
 />
-<script type="text/javascript"
-        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
-<script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "U-tZf9Uvi0cbaWG0z",
-      });
-   })();
-</script>
+
+
+   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+   
 </head>
 
 <body class="index-page">
@@ -805,40 +799,40 @@
           </div>
 
           <div class="col-lg-7">
-            <form action=""  class="php-email-form" data-aos="fade-up" data-aos-delay="200" id="submit-form" method="post" >
+
+            <form id="contactForm"  class="php-email-form" data-aos="fade-up" data-aos-delay="200">
               <div class="row gy-4">
-
                 <div class="col-md-6">
-                  <label for="name-field" class="pb-2">Your Name</label>
-                  <input type="text" name="name" id="name-field" class="form-control" required="">
-                </div>
-
-                <div class="col-md-6">
-                  <label for="email-field" class="pb-2">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email-field" required="">
-                </div>
-
-                <div class="col-md-12">
-                  <label for="subject-field" class="pb-2">Phone</label>
-                  <input type="tel"  class="form-control" name="phone"  id="phone-field"  required="" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" >
-                 
-                </div>
-
-                <div class="col-md-12">
-                  <label for="message-field" class="pb-2">Message</label>
-                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                  <button type="submit" value="submit" id="submit" onclick="sendMail()">Send Message</button>
-                </div>
-
+                <label for="name" class="pb-2">Name</label>
+                <input type="text"  id="name" placeholder="Your Name" size="50" />
+                <small class="error" id="nameError"></small>
               </div>
+              <div class="col-md-6">
+                <label for="email" class="pb-2">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Your Email"size="50" />
+                <small class="error" id="emailError"></small>
+              </div>
+              <div class="col-md-12">
+                <label for="phone" class="pb-2">Phone Number</label>
+                <input type="text" class="form-control"  id="phone" placeholder="Your Phone Number" size="50"/>
+                <small class="error" id="phoneError"></small>
+              </div>
+              <div class="col-md-12">
+                <label for="message"  class="pb-2">Message</label>
+                <textarea  id="message" class="form-control"  rows="10" placeholder="Your Message" ></textarea>
+                <small class="error" id="messageError"></small>
+              </div>
+              <div class="col-md-12 text-center">
+                <div class="loading">Loading</div>
+                <!-- <div class="error-message"></div> -->
+                <div class="sent-message">Your message has been sent. Thank you!</div>
+
+                <button type="submit" value="submit" id="submit" onclick="">Send Message</button>
+              </div>
+              <!-- <button type="submit" class="btn btn-primary" onclick="">Send</button> -->
+            </div>
             </form>
+            
           </div><!-- End Contact Form -->
 
         </div>
@@ -887,52 +881,9 @@
  
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-<!-- <script>
-  (function() {
-    emailjs.init('dilnagangadharan@gmail.com');
-  })();
-</script> -->
-  <script>
-    // $("#submit-form").submit((e)=>{
-    //     e.preventDefault()
-    //     $.ajax({
-    //         url:"https://script.google.com/macros/s/AKfycbyD2jJb19JgKKx2e4-wy6VrCGn2pleVeUgdxas5VAyDfprZFIew-Rd_t707cuQrq8Zg/exec",
-    //         data:$("#submit-form").serialize(),
-    //         method:"post",
-    //         success:function (response){
-    //             alert("Form submitted successfully")
-    //             window.location.reload()
-    //             //window.location.href="https://google.com"
-    //         },
-    //         error:function (err){
-    //             alert("Something Error")
-
-    //         }
-    //     })
-    // })
+  <!-- <script src="https://cdn.emailjs.com/dist/email.min.js"></script> -->
 
 
-    $("#submit-form").submit((e) => {
-  e.preventDefault();
-  $.ajax({
-    url: "https://script.google.com/macros/s/AKfycbyD2jJb19JgKKx2e4-wy6VrCGn2pleVeUgdxas5VAyDfprZFIew-Rd_t707cuQrq8Zg/exec",
-    data: $("#submit-form").serialize(),
-    method: "post",
-    async:true,
-    dataType : 'jsonp',
-    crossDomain:true,
-    success: (response) => {
-      alert("Form submitted successfully");
-      window.location.reload();
-    },
-    error: (err) => {
-      alert("Something Error");
-      console.log(err); // Log error details for debugging
-    }
-  });
-});
-</script>
 </body>
 
 </html>

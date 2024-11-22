@@ -228,39 +228,119 @@
 
 })();
 
-function sendMail() {
-  var params = {
-    name: document.getElementById("name").value,
-    email: document.getElementById("email").value,
-    phone:document.getElementById("phone").value,
-    message: document.getElementById("message").value,
-  };
+// function sendMail() {
+//   var params = {
+//     name: document.getElementById("name").value,
+//     email: document.getElementById("email").value,
+//     phone:document.getElementById("phone").value,
+//     message: document.getElementById("message").value,
+//   };
 
-  const serviceID = "service_f4bt6kn";
-  const templateID = "template_r8fxngf";
+//   const serviceID = "service_f4bt6kn";
+//   const templateID = "template_r8fxngf";
 
-    emailjs.send(serviceID, templateID, params)
-    .then(res=>{
-        document.getElementById("name").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("phone").value="";
-        document.getElementById("message").value = "";
-        console.log(res);
-        alert("Your message sent successfully!!")
+//     emailjs.send(serviceID, templateID, params)
+//     .then(res=>{
+//         document.getElementById("name").value = "";
+//         document.getElementById("email").value = "";
+//         document.getElementById("phone").value="";
+//         document.getElementById("message").value = "";
+//         console.log(res);
+//         alert("Your message sent successfully!!")
 
-    })
-    .catch(err=>console.log(err));
+//     })
+//     .catch(err=>console.log(err));
 
-}
+// }
 
-  document.getElementById('submit-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    emailjs.sendForm('service_5cnq41b', 'template_opnuh89', this)
-      .then(function(response) {
-        console.log('Email sent!', response.status, response.text);
-        alert('Email sent successfully!');
-      }, function(error) {
-        console.error('Error sending email:', error);
-        alert('Oops! Something went wrong.');
-      });
+//   document.getElementById('submit-form').addEventListener('submit', function(event) {
+//     event.preventDefault();
+//     emailjs.sendForm('service_5cnq41b', 'template_opnuh89', this)
+//       .then(function(response) {
+//         console.log('Email sent!', response.status, response.text);
+//         alert('Email sent successfully!');
+//       }, function(error) {
+//         console.error('Error sending email:', error);
+//         alert('Oops! Something went wrong.');
+//       });
+//   });
+
+  emailjs.init("U-tZf9Uvi0cbaWG0z"); // Replace with your EmailJS Public Key
+
+  const form = document.getElementById("contactForm");
+  
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+  
+    // Form fields
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const message = document.getElementById("message");
+  
+    // Error elements
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const phoneError = document.getElementById("phoneError");
+    const messageError = document.getElementById("messageError");
+  
+    // Validation flags
+    let isValid = true;
+  
+    // Clear previous errors
+    nameError.textContent = "";
+    emailError.textContent = "";
+    phoneError.textContent = "";
+    messageError.textContent = "";
+  
+    // Validate Name
+    if (name.value.trim() === "") {
+      nameError.textContent = "Name is required.";
+      isValid = false;
+    }
+  
+    // Validate Email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email.value.trim() === "") {
+      emailError.textContent = "Email is required.";
+      isValid = false;
+    } else if (!emailPattern.test(email.value)) {
+      emailError.textContent = "Please enter a valid email address.";
+      isValid = false;
+    }
+  
+    // Validate Phone
+    const phonePattern = /^[0-9]{10}$/;
+    if (phone.value.trim() === "") {
+      phoneError.textContent = "Phone number is required.";
+      isValid = false;
+    } else if (!phonePattern.test(phone.value)) {
+      phoneError.textContent = "Please enter a valid 10-digit phone number.";
+      isValid = false;
+    }
+  
+    // Validate Message
+    if (message.value.trim() === "") {
+      messageError.textContent = "Message is required.";
+      isValid = false;
+    }
+  
+    // If form is valid, send the email
+    if (isValid) {
+      emailjs
+        .send("service_f4bt6kn","template_r8fxngf", {
+          name: name.value,
+          email: email.value,
+          phone: phone.value,
+          message: message.value,
+        })
+        .then(() => {
+          alert("Message sent successfully!");
+          form.reset(); // Clear form fields
+        })
+        .catch((error) => {
+          alert("Failed to send the message. Please try again.");
+          console.error("EmailJS error:", error);
+        });
+    }
   });
